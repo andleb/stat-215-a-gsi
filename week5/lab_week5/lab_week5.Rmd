@@ -108,6 +108,10 @@ However, not all clustering/unsupervised problems are this easy.
 ```{r tcga-kmeans}
 load("./data/tcga_brca.Rdata")  # -> X and Y
 
+pr_cmp <- prcomp(X, center = TRUE, scale. = TRUE, rank = 100, retx = TRUE)
+
+kmeans
+
 
 ```
 
