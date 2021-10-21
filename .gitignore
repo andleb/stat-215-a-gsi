@@ -9,7 +9,8 @@
 /week4/
 /week5/
 /week6/
-/week7/
+/week7/rcpp_example/untitled
+# !/week7/Rcpp_test/CMakeLists.txt
 /week8/
 /week9/
 /week10/
@@ -23,3 +24,7 @@
 /scripts/
 /gsi/
 
+*.log
+*.txt.user
+/week7/Week7.tex
+*.Rhistory
