@@ -217,15 +217,6 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-message-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBmb3JlYWNoXG4ifQ== -->
-<pre><code>Loading required package: foreach</code></pre>
-<!-- rnb-message-end -->
-<!-- rnb-message-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBpdGVyYXRvcnNcbiJ9 -->
-<pre><code>Loading required package: iterators</code></pre>
-<!-- rnb-message-end -->
-<!-- rnb-message-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBwYXJhbGxlbFxuIn0= -->
-<pre><code>Loading required package: parallel</code></pre>
-<!-- rnb-message-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="gradient-decent-for-linear-regression" class="section level2">
@@ -233,8 +224,9 @@ pre code {
 <p>Let us consider the following regression model: <span class="math display">\[Y = X\beta + \epsilon, \epsilon \sim N(\mathbf{0}, \sigma^2 I)\]</span>, today we will implement the stochastic gradient decent algorithm and introduce some ways in which we can speed up the computation.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ2V0X2RhdGEgPC0gZnVuY3Rpb24oKXtcbm5fc2FtcGxlcyA8LSAxMDAwMFxuZmVhdHVyZXMgPC0gNTBcblggPC0gbWF0cml4KHJub3JtKG4gPSBuX3NhbXBsZXMqZmVhdHVyZXMpLG5yb3c9bl9zYW1wbGVzKVxuZXBzaWxvbiA8LSBybm9ybShuPW5fc2FtcGxlcyxzZCA9MC4xKVxuYmV0YSA8LSBybm9ybShuPWZlYXR1cmVzKVxueSA8LSBYICUqJSBiZXRhICsgZXBzaWxvblxucmV0dXJuKGNiaW5kKFgsIHkpKVxufSJ9 -->
-<pre class="r"><code>get_data &lt;- function(){
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5nZXRfZGF0YSA8LSBmdW5jdGlvbigpe1xubl9zYW1wbGVzIDwtIDEwMDAwXG5mZWF0dXJlcyA8LSA1MFxuWCA8LSBtYXRyaXgocm5vcm0obiA9IG5fc2FtcGxlcypmZWF0dXJlcyksbnJvdz1uX3NhbXBsZXMpXG5lcHNpbG9uIDwtIHJub3JtKG49bl9zYW1wbGVzLHNkID0wLjEpXG5iZXRhIDwtIHJub3JtKG49ZmVhdHVyZXMpXG55IDwtIFggJSolIGJldGEgKyBlcHNpbG9uXG5yZXR1cm4oY2JpbmQoWCwgeSkpXG59XG5cblxuXG5gYGAifQ== -->
+<pre class="r"><code>
+get_data &lt;- function(){
 n_samples &lt;- 10000
 features &lt;- 50
 X &lt;- matrix(rnorm(n = n_samples*features),nrow=n_samples)
@@ -242,7 +234,8 @@ epsilon &lt;- rnorm(n=n_samples,sd =0.1)
 beta &lt;- rnorm(n=features)
 y &lt;- X %*% beta + epsilon
 return(cbind(X, y))
-}</code></pre>
+}
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -260,7 +253,7 @@ return(cbind(X, y))
 \]</span></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ2V0X2JldGFfc2dkIDwtIGZ1bmN0aW9uKFgsIHksZ2V0X2dyYWRpZW50LCBiYXRjaF9zaXplPTMyLCBuX2l0ZXI9MTAwMCwgdG9sPTAuMDEsIGdhbW1hID0gMC4wMDEpe1xuICBmZWF0dXJlcyA8LSBkaW0oWClbMl1cbiAgYmV0YSA8LSBtYXRyaXgocnVuaWYoZmVhdHVyZXMpLCBucm93ID0gMSlcbiAgZm9yIChpIGluIDE6bl9pdGVyKXtcbiAgICBzdWJfc2FtcGxlIDwtIHNhbXBsZShsZW5ndGgoeSksIGJhdGNoX3NpemUpXG4gICAgZ3JhZCA8LSBnZXRfZ3JhZGllbnQoWFtzdWJfc2FtcGxlLCBdLCB5W3N1Yl9zYW1wbGVdLCBiZXRhKVxuICAgIGlmIChzdW0oZ3JhZF4yKSA8PSB0b2wpe1xuICAgICAgcmV0dXJuKGJldGEpXG4gICAgfVxuXG5cbiAgICBiZXRhICA8LSBiZXRhIC0gZ2FtbWEgKiBncmFkXG4gIH1cblxuICByZXR1cm4oYmV0YSlcblxufSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0X2JldGFfc2dkIDwtIGZ1bmN0aW9uKFgsIHksZ2V0X2dyYWRpZW50LCBiYXRjaF9zaXplPTMyLCBuX2l0ZXI9MTAwMCwgdG9sPTAuMDEsIGdhbW1hID0gMC4wMDEpe1xuICBmZWF0dXJlcyA8LSBkaW0oWClbMl1cbiAgYmV0YSA8LSBtYXRyaXgocnVuaWYoZmVhdHVyZXMpLCBucm93ID0gMSlcbiAgZm9yIChpIGluIDE6bl9pdGVyKXtcbiAgICBzdWJfc2FtcGxlIDwtIHNhbXBsZShsZW5ndGgoeSksIGJhdGNoX3NpemUpXG4gICAgZ3JhZCA8LSBnZXRfZ3JhZGllbnQoWFtzdWJfc2FtcGxlLCBdLCB5W3N1Yl9zYW1wbGVdLCBiZXRhKVxuICAgIGlmIChzdW0oZ3JhZF4yKSA8PSB0b2wpe1xuICAgICAgcmV0dXJuKGJldGEpXG4gICAgfVxuXG5cbiAgICBiZXRhICA8LSBiZXRhIC0gZ2FtbWEgKiBncmFkXG4gIH1cblxuICByZXR1cm4oYmV0YSlcblxufVxuXG5gYGAifQ== -->
 <pre class="r"><code>get_beta_sgd &lt;- function(X, y,get_gradient, batch_size=32, n_iter=1000, tol=0.01, gamma = 0.001){
   features &lt;- dim(X)[2]
   beta &lt;- matrix(runif(features), nrow = 1)
@@ -276,14 +269,15 @@ return(cbind(X, y))
 
   return(beta)
 
-}</code></pre>
+}
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>We start with naive implementation</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ2V0X2dyYWRpZW50X25haXZlIDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpe1xuICBncmFkIDwtIGJldGEgKiAwXG4gIG5fZGF0YV9wb2ludCA8LSBsZW5ndGgoeSlcbiAgZm9yIChpIGluIDE6bl9kYXRhX3BvaW50KXtcbiAgICBkaWZmIDwtIChYW2ksXSAlKiUgYmV0YSAteVtpXSlbMV1cbiAgICBncmFkIDwtIGdyYWQgKyBkaWZmICogWFtpLF1cbiAgfVxuICByZXR1cm4oZ3JhZClcblxufSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0X2dyYWRpZW50X25haXZlIDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpe1xuICBncmFkIDwtIGJldGEgKiAwXG4gIG5fZGF0YV9wb2ludCA8LSBsZW5ndGgoeSlcbiAgZm9yIChpIGluIDE6bl9kYXRhX3BvaW50KXtcbiAgICBkaWZmIDwtIChYW2ksXSAlKiUgYmV0YSAteVtpXSlbMV1cbiAgICBncmFkIDwtIGdyYWQgKyBkaWZmICogWFtpLF1cbiAgfVxuICByZXR1cm4oZ3JhZClcblxufVxuXG5gYGAifQ== -->
 <pre class="r"><code>get_gradient_naive &lt;- function(X, y, beta){
   grad &lt;- beta * 0
   n_data_point &lt;- length(y)
@@ -293,14 +287,15 @@ return(cbind(X, y))
   }
   return(grad)
 
-}</code></pre>
+}
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Now let’s go one step further, using matrix operations</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiZ2V0X2dyYWRpZW50IDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpe1xuICBkaWZmIDwtIFggJSolIG1hdHJpeChiZXRhLCBuY29sPTEpIC0geVxuICBncmFkIDwtdChkaWZmKSAlKiUgWFxuICByZXR1cm4oZ3JhZClcblxufSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0X2dyYWRpZW50IDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpe1xuICBkaWZmIDwtIFggJSolIG1hdHJpeChiZXRhLCBuY29sPTEpIC0geVxuICBncmFkIDwtdChkaWZmKSAlKiUgWFxuICByZXR1cm4oZ3JhZClcblxufVxuYGBgIn0= -->
 <pre class="r"><code>get_gradient &lt;- function(X, y, beta){
   diff &lt;- X %*% matrix(beta, ncol=1) - y
   grad &lt;-t(diff) %*% X
@@ -312,8 +307,9 @@ return(cbind(X, y))
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImJtIDwtIGJlbmNobWFyayhcIm5haXZlIHNnZFwiID0ge1xuICAgICAgICAgICAgICAgICAgZGF0YSA8LSBnZXRfZGF0YSgpXG4gICAgICAgICAgICAgICAgICBYIDwtIGRhdGFbLDE6NTBdXG4gICAgICAgICAgICAgICAgICB5IDwtIGRhdGFbLDUxXVxuICAgICAgICAgICAgICAgICAgYiA8LSBnZXRfYmV0YV9zZ2QoWCwgeSwgZ2V0X2dyYWRpZW50X25haXZlKVxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgXCJzZ2RcIiA9IHtcbiAgICAgICAgICAgICAgICAgIGRhdGEgPC0gZ2V0X2RhdGEoKVxuICAgICAgICAgICAgICAgICAgWCA8LSBkYXRhWywxOjUwXVxuICAgICAgICAgICAgICAgICAgeSA8LSBkYXRhWyw1MV1cbiAgICAgICAgICAgICAgICAgIGIgPC0gZ2V0X2JldGFfc2dkKFgsIHksIGdldF9ncmFkaWVudClcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsXG4gICAgICAgICAgICAgICAgY29sdW1ucyA9IGMoXCJ0ZXN0XCIsICBcImVsYXBzZWRcIixcInJlbGF0aXZlXCIpKSIsIiIsImthYmxlKGJtKSJdfQ== -->
-<pre class="r"><code>bm &lt;- benchmark(&quot;naive sgd&quot; = {
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ibSA8LSBiZW5jaG1hcmsoXCJuYWl2ZSBzZ2RcIiA9IHtcbiAgICAgICAgICAgICAgICAgIGRhdGEgPC0gZ2V0X2RhdGEoKVxuICAgICAgICAgICAgICAgICAgWCA8LSBkYXRhWywxOjUwXVxuICAgICAgICAgICAgICAgICAgeSA8LSBkYXRhWyw1MV1cbiAgICAgICAgICAgICAgICAgIGIgPC0gZ2V0X2JldGFfc2dkKFgsIHksIGdldF9ncmFkaWVudF9uYWl2ZSlcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIFwic2dkXCIgPSB7XG4gICAgICAgICAgICAgICAgICBkYXRhIDwtIGdldF9kYXRhKClcbiAgICAgICAgICAgICAgICAgIFggPC0gZGF0YVssMTo1MF1cbiAgICAgICAgICAgICAgICAgIHkgPC0gZGF0YVssNTFdXG4gICAgICAgICAgICAgICAgICBiIDwtIGdldF9iZXRhX3NnZChYLCB5LCBnZXRfZ3JhZGllbnQpXG4gICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICByZXBsaWNhdGlvbnMgPSA1LFxuICAgICAgICAgICAgICAgIGNvbHVtbnMgPSBjKFwidGVzdFwiLCAgXCJlbGFwc2VkXCIsXCJyZWxhdGl2ZVwiKSlcblxua2FibGUoYm0pXG5cbmBgYCJ9 -->
+<pre class="r"><code>
+bm &lt;- benchmark(&quot;naive sgd&quot; = {
                   data &lt;- get_data()
                   X &lt;- data[,1:50]
                   y &lt;- data[,51]
@@ -328,35 +324,15 @@ return(cbind(X, y))
                 replications = 5,
                 columns = c(&quot;test&quot;,  &quot;elapsed&quot;,&quot;relative&quot;))
 
-kable(bm)</code></pre>
+kable(bm)
+</code></pre>
 <!-- rnb-source-end -->
-<table>
-<thead>
-<tr class="header">
-<th align="left">test</th>
-<th align="right">elapsed</th>
-<th align="right">relative</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">naive sgd</td>
-<td align="right">2.074</td>
-<td align="right">3.813</td>
-</tr>
-<tr class="even">
-<td align="left">sgd</td>
-<td align="right">0.544</td>
-<td align="right">1.000</td>
-</tr>
-</tbody>
-</table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Now suppose we want to do some stability analysis, fitting the model on variations of the dataset. We start the naive approach - looping</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoic3RhYmlsaXR5X2JldGEgPC0gZnVuY3Rpb24oKXtcbiAgICBkYXRhIDwtIGdldF9kYXRhKClcbiAgICBYIDwtIGRhdGFbLDE6NTBdXG4gICAgeSA8LSBkYXRhWyw1MV1cbiAgICBiZXRhIDwtIGdldF9iZXRhX3NnZChYLCB5LCBnZXRfZ3JhZGllbnQpXG4gIHJldHVybihiZXRhKVxuXG59In0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RhYmlsaXR5X2JldGEgPC0gZnVuY3Rpb24oKXtcbiAgICBkYXRhIDwtIGdldF9kYXRhKClcbiAgICBYIDwtIGRhdGFbLDE6NTBdXG4gICAgeSA8LSBkYXRhWyw1MV1cbiAgICBiZXRhIDwtIGdldF9iZXRhX3NnZChYLCB5LCBnZXRfZ3JhZGllbnQpXG4gIHJldHVybihiZXRhKVxuXG59XG5cblxuYGBgIn0= -->
 <pre class="r"><code>stability_beta &lt;- function(){
     data &lt;- get_data()
     X &lt;- data[,1:50]
@@ -364,15 +340,18 @@ kable(bm)</code></pre>
     beta &lt;- get_beta_sgd(X, y, get_gradient)
   return(beta)
 
-}</code></pre>
+}
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>A better approach would be to parallelize this calculation, that is fit multiple model at the same time</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInN0YWJpbGl0eV9sb29wIDwtIGZ1bmN0aW9uKG4pe1xuICBmb3IgKGkgaW4gMTpuKXtcbiAgICBiZXRhIDwtIHN0YWJpbGl0eV9iZXRhKClcbiAgfVxufSIsInN0YWJpbGl0eV9wYXJhbGxlbCA8LSBmdW5jdGlvbihuKXtcbm5vX2NvcmVzIDwtIGRldGVjdENvcmVzKCkgLSAxXG5jbCA8LSBtYWtlQ2x1c3Rlcihub19jb3JlcywgdHlwZT1cIkZPUktcIilcbnJlZ2lzdGVyRG9QYXJhbGxlbChjbClcbnJlc3VsdCA8LSBmb3JlYWNoKGk9MTpuKSAlZG9wYXIlIHN0YWJpbGl0eV9iZXRhKClcblxufSJdfQ== -->
-<pre class="r"><code>stability_loop &lt;- function(n){
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5cbnN0YWJpbGl0eV9sb29wIDwtIGZ1bmN0aW9uKG4pe1xuICBmb3IgKGkgaW4gMTpuKXtcbiAgICBiZXRhIDwtIHN0YWJpbGl0eV9iZXRhKClcbiAgfVxufVxuc3RhYmlsaXR5X3BhcmFsbGVsIDwtIGZ1bmN0aW9uKG4pe1xubm9fY29yZXMgPC0gZGV0ZWN0Q29yZXMoKSAtIDFcbmNsIDwtIG1ha2VDbHVzdGVyKG5vX2NvcmVzLCB0eXBlPVwiRk9SS1wiKVxucmVnaXN0ZXJEb1BhcmFsbGVsKGNsKVxucmVzdWx0IDwtIGZvcmVhY2goaT0xOm4pICVkb3BhciUgc3RhYmlsaXR5X2JldGEoKVxuXG59XG5gYGAifQ== -->
+<pre class="r"><code>
+
+stability_loop &lt;- function(n){
   for (i in 1:n){
     beta &lt;- stability_beta()
   }
@@ -389,7 +368,7 @@ result &lt;- foreach(i=1:n) %dopar% stability_beta()
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImJtIDwtIGJlbmNobWFyayhcInBhcmFsZWxsXCIgPSB7XG4gIHN0YWJpbGl0eV9wYXJhbGxlbCgxMClcbn0sXG4gICAgICAgICAgICAgICAgXCJsb29wXCIgPSB7XG4gICAgICAgICAgICAgICAgICBzdGFiaWxpdHlfbG9vcCgxMClcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsXG4gICAgICAgICAgICAgICAgY29sdW1ucyA9IGMoXCJ0ZXN0XCIsICBcImVsYXBzZWRcIixcInJlbGF0aXZlXCIpKSIsIiIsImthYmxlKGJtKSJdfQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYm0gPC0gYmVuY2htYXJrKFwicGFyYWxlbGxcIiA9IHtcbiAgc3RhYmlsaXR5X3BhcmFsbGVsKDEwKVxufSxcbiAgICAgICAgICAgICAgICBcImxvb3BcIiA9IHtcbiAgICAgICAgICAgICAgICAgIHN0YWJpbGl0eV9sb29wKDEwKVxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSxcbiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYyhcInRlc3RcIiwgIFwiZWxhcHNlZFwiLFwicmVsYXRpdmVcIikpXG5cbmthYmxlKGJtKVxuXG5cbmBgYCJ9 -->
 <pre class="r"><code>bm &lt;- benchmark(&quot;paralell&quot; = {
   stability_parallel(10)
 },
@@ -399,32 +378,9 @@ result &lt;- foreach(i=1:n) %dopar% stability_beta()
                 replications = 5,
                 columns = c(&quot;test&quot;,  &quot;elapsed&quot;,&quot;relative&quot;))
 
-kable(bm)</code></pre>
+kable(bm)
+</code></pre>
 <!-- rnb-source-end -->
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">test</th>
-<th align="right">elapsed</th>
-<th align="right">relative</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2</td>
-<td align="left">loop</td>
-<td align="right">5.530</td>
-<td align="right">1.618</td>
-</tr>
-<tr class="even">
-<td align="left">1</td>
-<td align="left">paralell</td>
-<td align="right">3.417</td>
-<td align="right">1.000</td>
-</tr>
-</tbody>
-</table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -433,23 +389,21 @@ kable(bm)</code></pre>
 <p>Rcpp enables improving performance by rewriting key functions in C++. We start with a simple example:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImNwcEZ1bmN0aW9uKCdpbnQgYWRkKGludCB4LCBpbnQgeSwgaW50IHopIHtcbiAgaW50IHN1bSA9IHggKyB5ICsgejtcbiAgcmV0dXJuIHN1bTtcbn0nKSIsIiIsImFkZCgxLCAyLCAzKSJdfQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3BwRnVuY3Rpb24oJ2ludCBhZGQoaW50IHgsIGludCB5LCBpbnQgeikge1xuICBpbnQgc3VtID0geCArIHkgKyB6O1xuICByZXR1cm4gc3VtO1xufScpXG5cbmFkZCgxLCAyLCAzKVxuXG5gYGAifQ== -->
 <pre class="r"><code>cppFunction(&#39;int add(int x, int y, int z) {
   int sum = x + y + z;
   return sum;
 }&#39;)
 
-add(1, 2, 3)</code></pre>
+add(1, 2, 3)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDZcbiJ9 -->
-<pre><code>[1] 6</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Vector input, scalar output</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInN1bVIgPC0gZnVuY3Rpb24oeCkge1xuICB0b3RhbCA8LSAwXG4gIGZvciAoaSBpbiBzZXFfYWxvbmcoeCkpIHtcbiAgICB0b3RhbCA8LSB0b3RhbCArIHhbaV1cbiAgfVxuICB0b3RhbFxufSIsIiIsImNwcEZ1bmN0aW9uKCdkb3VibGUgc3VtQyhOdW1lcmljVmVjdG9yIHgpIHtcbiAgaW50IG4gPSB4LnNpemUoKTtcbiAgZG91YmxlIHRvdGFsID0gMDtcbiAgZm9yKGludCBpID0gMDsgaSA8IG47ICsraSkge1xuICAgIHRvdGFsICs9IHhbaV07XG4gIH1cbiAgcmV0dXJuIHRvdGFsO1xufScpIl19 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtUiA8LSBmdW5jdGlvbih4KSB7XG4gIHRvdGFsIDwtIDBcbiAgZm9yIChpIGluIHNlcV9hbG9uZyh4KSkge1xuICAgIHRvdGFsIDwtIHRvdGFsICsgeFtpXVxuICB9XG4gIHRvdGFsXG59XG5cbmNwcEZ1bmN0aW9uKCdkb3VibGUgc3VtQyhOdW1lcmljVmVjdG9yIHgpIHtcbiAgaW50IG4gPSB4LnNpemUoKTtcbiAgZG91YmxlIHRvdGFsID0gMDtcbiAgZm9yKGludCBpID0gMDsgaSA8IG47ICsraSkge1xuICAgIHRvdGFsICs9IHhbaV07XG4gIH1cbiAgcmV0dXJuIHRvdGFsO1xufScpXG5cbmBgYCJ9 -->
 <pre class="r"><code>sumR &lt;- function(x) {
   total &lt;- 0
   for (i in seq_along(x)) {
@@ -465,7 +419,8 @@ cppFunction(&#39;double sumC(NumericVector x) {
     total += x[i];
   }
   return total;
-}&#39;)</code></pre>
+}&#39;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -478,7 +433,7 @@ cppFunction(&#39;double sumC(NumericVector x) {
 <p>Let’s compare the running times:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInZlY3RvciA9IHJub3JtKDEwMDAwKSIsImJtIDwtIGJlbmNobWFyayhcIlJjcHBcIiA9IHtcbiAgc3VtQyh2ZWN0b3IpXG59LFxuICAgICAgICAgICAgICAgIFwiUlwiID0ge1xuICAgICAgICAgICAgICAgICAgc3VtUih2ZWN0b3IpXG4gICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICByZXBsaWNhdGlvbnMgPSA1LFxuICAgICAgICAgICAgICAgIGNvbHVtbnMgPSBjKFwidGVzdFwiLCAgXCJlbGFwc2VkXCIsXCJyZWxhdGl2ZVwiKSkiLCIiLCJrYWJsZShibSkiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmVjdG9yID0gcm5vcm0oMTAwMDApXG5ibSA8LSBiZW5jaG1hcmsoXCJSY3BwXCIgPSB7XG4gIHN1bUModmVjdG9yKVxufSxcbiAgICAgICAgICAgICAgICBcIlJcIiA9IHtcbiAgICAgICAgICAgICAgICAgIHN1bVIodmVjdG9yKVxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSxcbiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYyhcInRlc3RcIiwgIFwiZWxhcHNlZFwiLFwicmVsYXRpdmVcIikpXG5cbmthYmxlKGJtKVxuYGBgIn0= -->
 <pre class="r"><code>vector = rnorm(10000)
 bm &lt;- benchmark(&quot;Rcpp&quot; = {
   sumC(vector)
@@ -491,36 +446,12 @@ bm &lt;- benchmark(&quot;Rcpp&quot; = {
 
 kable(bm)</code></pre>
 <!-- rnb-source-end -->
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">test</th>
-<th align="right">elapsed</th>
-<th align="right">relative</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2</td>
-<td align="left">R</td>
-<td align="right">0.002</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">1</td>
-<td align="left">Rcpp</td>
-<td align="right">0.001</td>
-<td align="right">1</td>
-</tr>
-</tbody>
-</table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Now matrices, let’s implement row sums:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiY3BwRnVuY3Rpb24oJ051bWVyaWNWZWN0b3Igcm93U3Vtc0MoTnVtZXJpY01hdHJpeCB4KSB7XG4gIGludCBucm93ID0geC5ucm93KCksIG5jb2wgPSB4Lm5jb2woKTtcbiAgTnVtZXJpY1ZlY3RvciBvdXQobnJvdyk7XG5cbiAgZm9yIChpbnQgaSA9IDA7IGkgPCBucm93OyBpKyspIHtcbiAgICBkb3VibGUgdG90YWwgPSAwO1xuICAgIGZvciAoaW50IGogPSAwOyBqIDwgbmNvbDsgaisrKSB7XG4gICAgICB0b3RhbCArPSB4KGksIGopO1xuICAgIH1cbiAgICBvdXRbaV0gPSB0b3RhbDtcbiAgfVxuICByZXR1cm4gb3V0O1xufScpIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3BwRnVuY3Rpb24oJ051bWVyaWNWZWN0b3Igcm93U3Vtc0MoTnVtZXJpY01hdHJpeCB4KSB7XG4gIGludCBucm93ID0geC5ucm93KCksIG5jb2wgPSB4Lm5jb2woKTtcbiAgTnVtZXJpY1ZlY3RvciBvdXQobnJvdyk7XG5cbiAgZm9yIChpbnQgaSA9IDA7IGkgPCBucm93OyBpKyspIHtcbiAgICBkb3VibGUgdG90YWwgPSAwO1xuICAgIGZvciAoaW50IGogPSAwOyBqIDwgbmNvbDsgaisrKSB7XG4gICAgICB0b3RhbCArPSB4KGksIGopO1xuICAgIH1cbiAgICBvdXRbaV0gPSB0b3RhbDtcbiAgfVxuICByZXR1cm4gb3V0O1xufScpXG5cbmBgYCJ9 -->
 <pre class="r"><code>cppFunction(&#39;NumericVector rowSumsC(NumericMatrix x) {
   int nrow = x.nrow(), ncol = x.ncol();
   NumericVector out(nrow);
@@ -533,7 +464,8 @@ kable(bm)</code></pre>
     out[i] = total;
   }
   return out;
-}&#39;)</code></pre>
+}&#39;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -544,7 +476,7 @@ kable(bm)</code></pre>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbInJvd3MgPC0gMTAwIiwiY29scyA8LSA1MDAwIiwiIiwiYm0gPC0gYmVuY2htYXJrKFwiUmNwcFwiID0ge1xuICB4IDwtIG1hdHJpeChzYW1wbGUocm93cypjb2xzKSwgcm93cylcbiAgcm93U3Vtc0MoeClcbn0sXG4gICAgICAgICAgICAgICAgXCJSXCIgPSB7XG4gICAgICAgICAgICAgICAgICB4IDwtIG1hdHJpeChzYW1wbGUocm93cypjb2xzKSwgcm93cylcbiAgICAgICAgICAgICAgICAgIHJvd1N1bXMoeClcbiAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsXG4gICAgICAgICAgICAgICAgY29sdW1ucyA9IGMoXCJ0ZXN0XCIsICBcImVsYXBzZWRcIixcInJlbGF0aXZlXCIpKSIsIiIsImthYmxlKGJtKSJdfQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm93cyA8LSAxMDBcbmNvbHMgPC0gNTAwMFxuXG5ibSA8LSBiZW5jaG1hcmsoXCJSY3BwXCIgPSB7XG4gIHggPC0gbWF0cml4KHNhbXBsZShyb3dzKmNvbHMpLCByb3dzKVxuICByb3dTdW1zQyh4KVxufSxcbiAgICAgICAgICAgICAgICBcIlJcIiA9IHtcbiAgICAgICAgICAgICAgICAgIHggPC0gbWF0cml4KHNhbXBsZShyb3dzKmNvbHMpLCByb3dzKVxuICAgICAgICAgICAgICAgICAgcm93U3Vtcyh4KVxuICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSxcbiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYyhcInRlc3RcIiwgIFwiZWxhcHNlZFwiLFwicmVsYXRpdmVcIikpXG5cbmthYmxlKGJtKVxuYGBgIn0= -->
 <pre class="r"><code>rows &lt;- 100
 cols &lt;- 5000
 
@@ -561,36 +493,12 @@ bm &lt;- benchmark(&quot;Rcpp&quot; = {
 
 kable(bm)</code></pre>
 <!-- rnb-source-end -->
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">test</th>
-<th align="right">elapsed</th>
-<th align="right">relative</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2</td>
-<td align="left">R</td>
-<td align="right">0.141</td>
-<td align="right">1.000</td>
-</tr>
-<tr class="even">
-<td align="left">1</td>
-<td align="left">Rcpp</td>
-<td align="right">0.170</td>
-<td align="right">1.206</td>
-</tr>
-</tbody>
-</table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2VlayA3IC0gQ29tcHV0YXRpb24gdHJpY2tzIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCmBgYHtyLCB3YXJuaW5nID0gRkFMU0UsZWNobz1GQUxTRX0KbGlicmFyeShyYmVuY2htYXJrKQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KGRvUGFyYWxsZWwpCmxpYnJhcnkoUmNwcCkKCmBgYAoKIyMgR3JhZGllbnQgRGVjZW50IGZvciBMaW5lYXIgUmVncmVzc2lvbgoKTGV0IHVzIGNvbnNpZGVyIHRoZSBmb2xsb3dpbmcgcmVncmVzc2lvbiBtb2RlbDoKJCRZID0gWFxiZXRhICsgXGVwc2lsb24sIFxlcHNpbG9uIFxzaW0gTihcbWF0aGJmezB9LCBcc2lnbWFeMiBJKSQkLCB0b2RheSB3ZSB3aWxsIGltcGxlbWVudCB0aGUgc3RvY2hhc3RpYyBncmFkaWVudCBkZWNlbnQgYWxnb3JpdGhtIGFuZCBpbnRyb2R1Y2Ugc29tZSB3YXlzIGluIHdoaWNoIHdlIGNhbiBzcGVlZCB1cCB0aGUgY29tcHV0YXRpb24uCmBgYHtyfQoKZ2V0X2RhdGEgPC0gZnVuY3Rpb24oKXsKbl9zYW1wbGVzIDwtIDEwMDAwCmZlYXR1cmVzIDwtIDUwClggPC0gbWF0cml4KHJub3JtKG4gPSBuX3NhbXBsZXMqZmVhdHVyZXMpLG5yb3c9bl9zYW1wbGVzKQplcHNpbG9uIDwtIHJub3JtKG49bl9zYW1wbGVzLHNkID0wLjEpCmJldGEgPC0gcm5vcm0obj1mZWF0dXJlcykKeSA8LSBYICUqJSBiZXRhICsgZXBzaWxvbgpyZXR1cm4oY2JpbmQoWCwgeSkpCn0KCgoKYGBgCgpPdXIgb2JqZWN0aXZlIGlzOgokJApcbWluX3tcYmV0YX1cVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMgokJAoKVGhlIGdyYWRpZW50IHdpdGggcmVzcGVjdCB0byAkXGJldGEkIGlzOgokJApcbmFibGFfe1xiZXRhfSBcVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMiA9IDIoWFxiZXRhIC0gWSlcY2RvdCBYID0gXHN1bV97aT0xfV5uIChYX3tpLn1cYmV0YSAtIFlfaSkgWF97Lml9CiQkCk91ciBnb2FsIHRvZGF5IGlzIHRvIGltcGxlbWVudCBHcmFkaWVudCBEZWNlbnQgYWxnb3JpdGhtLCB3aXRoIHRoZSBmb2xsb3dpbmcgdXBkYXRlIHJ1bGU6CgoKCiQkClxiZWdpbnthbGlnbn0KXGJldGFeeyh0KzEpfSAmPSBcYmV0YV57KHQpfSAtIFxnYW1tYSBcbmFibGFfe1xiZXRhfSBcVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMlxcCiY9IFxiZXRhXnsodCl9IC0gXGdhbW1hIFxjZG90IFxzdW1fe2k9MX1ebiAoWF97aS59XGJldGFeeyh0KX0gLSBZX2kpIFhfey5pfQpcZW5ke2FsaWdufQokJAoKYGBge3J9CmdldF9iZXRhX3NnZCA8LSBmdW5jdGlvbihYLCB5LGdldF9ncmFkaWVudCwgYmF0Y2hfc2l6ZT0zMiwgbl9pdGVyPTEwMDAsIHRvbD0wLjAxLCBnYW1tYSA9IDAuMDAxKXsKICBmZWF0dXJlcyA8LSBkaW0oWClbMl0KICBiZXRhIDwtIG1hdHJpeChydW5pZihmZWF0dXJlcyksIG5yb3cgPSAxKQogIGZvciAoaSBpbiAxOm5faXRlcil7CiAgICBzdWJfc2FtcGxlIDwtIHNhbXBsZShsZW5ndGgoeSksIGJhdGNoX3NpemUpCiAgICBncmFkIDwtIGdldF9ncmFkaWVudChYW3N1Yl9zYW1wbGUsIF0sIHlbc3ViX3NhbXBsZV0sIGJldGEpCiAgICBpZiAoc3VtKGdyYWReMikgPD0gdG9sKXsKICAgICAgcmV0dXJuKGJldGEpCiAgICB9CgoKICAgIGJldGEgIDwtIGJldGEgLSBnYW1tYSAqIGdyYWQKICB9CgogIHJldHVybihiZXRhKQoKfQoKYGBgCldlIHN0YXJ0IHdpdGggbmFpdmUgaW1wbGVtZW50YXRpb24KYGBge3J9CmdldF9ncmFkaWVudF9uYWl2ZSA8LSBmdW5jdGlvbihYLCB5LCBiZXRhKXsKICBncmFkIDwtIGJldGEgKiAwCiAgbl9kYXRhX3BvaW50IDwtIGxlbmd0aCh5KQogIGZvciAoaSBpbiAxOm5fZGF0YV9wb2ludCl7CiAgICBkaWZmIDwtIChYW2ksXSAlKiUgYmV0YSAteVtpXSlbMV0KICAgIGdyYWQgPC0gZ3JhZCArIGRpZmYgKiBYW2ksXQogIH0KICByZXR1cm4oZ3JhZCkKCn0KCmBgYAoKTm93IGxldCdzIGdvIG9uZSBzdGVwIGZ1cnRoZXIsIHVzaW5nIG1hdHJpeCBvcGVyYXRpb25zCgpgYGB7cn0KZ2V0X2dyYWRpZW50IDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpewogIGRpZmYgPC0gWCAlKiUgbWF0cml4KGJldGEsIG5jb2w9MSkgLSB5CiAgZ3JhZCA8LXQoZGlmZikgJSolIFgKICByZXR1cm4oZ3JhZCkKCn0KYGBgCgpgYGB7cn0KCmJtIDwtIGJlbmNobWFyaygibmFpdmUgc2dkIiA9IHsKICAgICAgICAgICAgICAgICAgZGF0YSA8LSBnZXRfZGF0YSgpCiAgICAgICAgICAgICAgICAgIFggPC0gZGF0YVssMTo1MF0KICAgICAgICAgICAgICAgICAgeSA8LSBkYXRhWyw1MV0KICAgICAgICAgICAgICAgICAgYiA8LSBnZXRfYmV0YV9zZ2QoWCwgeSwgZ2V0X2dyYWRpZW50X25haXZlKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICJzZ2QiID0gewogICAgICAgICAgICAgICAgICBkYXRhIDwtIGdldF9kYXRhKCkKICAgICAgICAgICAgICAgICAgWCA8LSBkYXRhWywxOjUwXQogICAgICAgICAgICAgICAgICB5IDwtIGRhdGFbLDUxXQogICAgICAgICAgICAgICAgICBiIDwtIGdldF9iZXRhX3NnZChYLCB5LCBnZXRfZ3JhZGllbnQpCiAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSwKICAgICAgICAgICAgICAgIGNvbHVtbnMgPSBjKCJ0ZXN0IiwgICJlbGFwc2VkIiwicmVsYXRpdmUiKSkKCmthYmxlKGJtKQoKYGBgCgoKTm93IHN1cHBvc2Ugd2Ugd2FudCB0byBkbyBzb21lIHN0YWJpbGl0eSBhbmFseXNpcywgZml0dGluZyB0aGUgbW9kZWwgb24gdmFyaWF0aW9ucyBvZiB0aGUgZGF0YXNldC4KV2Ugc3RhcnQgdGhlIG5haXZlIGFwcHJvYWNoIC0gbG9vcGluZwpgYGB7cn0Kc3RhYmlsaXR5X2JldGEgPC0gZnVuY3Rpb24oKXsKICAgIGRhdGEgPC0gZ2V0X2RhdGEoKQogICAgWCA8LSBkYXRhWywxOjUwXQogICAgeSA8LSBkYXRhWyw1MV0KICAgIGJldGEgPC0gZ2V0X2JldGFfc2dkKFgsIHksIGdldF9ncmFkaWVudCkKICByZXR1cm4oYmV0YSkKCn0KCgpgYGAKCgpBIGJldHRlciBhcHByb2FjaCB3b3VsZCBiZSB0byBwYXJhbGxlbGl6ZSB0aGlzIGNhbGN1bGF0aW9uLCB0aGF0IGlzIGZpdCBtdWx0aXBsZSBtb2RlbCBhdCB0aGUgc2FtZSB0aW1lCgpgYGB7cn0KCgpzdGFiaWxpdHlfbG9vcCA8LSBmdW5jdGlvbihuKXsKICBmb3IgKGkgaW4gMTpuKXsKICAgIGJldGEgPC0gc3RhYmlsaXR5X2JldGEoKQogIH0KfQpzdGFiaWxpdHlfcGFyYWxsZWwgPC0gZnVuY3Rpb24obil7Cm5vX2NvcmVzIDwtIGRldGVjdENvcmVzKCkgLSAxCmNsIDwtIG1ha2VDbHVzdGVyKG5vX2NvcmVzLCB0eXBlPSJGT1JLIikKcmVnaXN0ZXJEb1BhcmFsbGVsKGNsKQpyZXN1bHQgPC0gZm9yZWFjaChpPTE6bikgJWRvcGFyJSBzdGFiaWxpdHlfYmV0YSgpCgp9CmBgYAoKCmBgYHtyfQpibSA8LSBiZW5jaG1hcmsoInBhcmFsZWxsIiA9IHsKICBzdGFiaWxpdHlfcGFyYWxsZWwoMTApCn0sCiAgICAgICAgICAgICAgICAibG9vcCIgPSB7CiAgICAgICAgICAgICAgICAgIHN0YWJpbGl0eV9sb29wKDEwKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsCiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYygidGVzdCIsICAiZWxhcHNlZCIsInJlbGF0aXZlIikpCgprYWJsZShibSkKCgpgYGAKCiMjIFJjcHAKClJjcHAgZW5hYmxlcyBpbXByb3ZpbmcgcGVyZm9ybWFuY2UgYnkgcmV3cml0aW5nIGtleSBmdW5jdGlvbnMgaW4gQysrLgpXZSBzdGFydCB3aXRoIGEgc2ltcGxlIGV4YW1wbGU6CgoKYGBge3J9CmNwcEZ1bmN0aW9uKCdpbnQgYWRkKGludCB4LCBpbnQgeSwgaW50IHopIHsKICBpbnQgc3VtID0geCArIHkgKyB6OwogIHJldHVybiBzdW07Cn0nKQoKYWRkKDEsIDIsIDMpCgpgYGAKCgoKVmVjdG9yIGlucHV0LCBzY2FsYXIgb3V0cHV0CgpgYGB7ciwgd2FybmluZyA9IEZBTFNFfQpzdW1SIDwtIGZ1bmN0aW9uKHgpIHsKICB0b3RhbCA8LSAwCiAgZm9yIChpIGluIHNlcV9hbG9uZyh4KSkgewogICAgdG90YWwgPC0gdG90YWwgKyB4W2ldCiAgfQogIHRvdGFsCn0KCmNwcEZ1bmN0aW9uKCdkb3VibGUgc3VtQyhOdW1lcmljVmVjdG9yIHgpIHsKICBpbnQgbiA9IHguc2l6ZSgpOwogIGRvdWJsZSB0b3RhbCA9IDA7CiAgZm9yKGludCBpID0gMDsgaSA8IG47ICsraSkgewogICAgdG90YWwgKz0geFtpXTsKICB9CiAgcmV0dXJuIHRvdGFsOwp9JykKCmBgYAoKQSBmZXcgc3ludGF4IGNvbW1lbnRzOgoKLSBgZG91YmxlIHN1bUMoTnVtZXJpY1ZlY3RvciB4KWAgLSBkb3VibGUgaXMgdGhlIG91dHB1dCB0eXBlLCBgc3VtQyhOdW1lcmljVmVjdG9yIHgpYCBpcyB0aGUgZnVuY3Rpb24uCgotIGBpbnQgbiA9IHguc2l6ZSgpYCAtIGNyYXRlIGFuIGludGVnZXIgZXF1YWxzIHRvIHRoZSBsZW5ndGggb2YgeCB2ZWN0b3IKCi0gYGRvdWJsZSB0b3RhbCA9IDBgIC0gY3JlYXRlIGEgZG91YmxlIHR5cGUgbmFtZWQgdG90YWwsIGVxdWFscyB0byB6ZXJvLgoKCkxldCdzIGNvbXBhcmUgdGhlIHJ1bm5pbmcgdGltZXM6CgpgYGB7cn0KdmVjdG9yID0gcm5vcm0oMTAwMDApCmJtIDwtIGJlbmNobWFyaygiUmNwcCIgPSB7CiAgc3VtQyh2ZWN0b3IpCn0sCiAgICAgICAgICAgICAgICAiUiIgPSB7CiAgICAgICAgICAgICAgICAgIHN1bVIodmVjdG9yKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsCiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYygidGVzdCIsICAiZWxhcHNlZCIsInJlbGF0aXZlIikpCgprYWJsZShibSkKYGBgCgoKTm93IG1hdHJpY2VzLCBsZXQncyBpbXBsZW1lbnQgcm93IHN1bXM6CmBgYHtyfQpjcHBGdW5jdGlvbignTnVtZXJpY1ZlY3RvciByb3dTdW1zQyhOdW1lcmljTWF0cml4IHgpIHsKICBpbnQgbnJvdyA9IHgubnJvdygpLCBuY29sID0geC5uY29sKCk7CiAgTnVtZXJpY1ZlY3RvciBvdXQobnJvdyk7CgogIGZvciAoaW50IGkgPSAwOyBpIDwgbnJvdzsgaSsrKSB7CiAgICBkb3VibGUgdG90YWwgPSAwOwogICAgZm9yIChpbnQgaiA9IDA7IGogPCBuY29sOyBqKyspIHsKICAgICAgdG90YWwgKz0geChpLCBqKTsKICAgIH0KICAgIG91dFtpXSA9IHRvdGFsOwogIH0KICByZXR1cm4gb3V0Owp9JykKCmBgYAoKQSBmZXcgc3ludGF4IGNvbW1lbnRzOgoKLWBOdW1lcmljVmVjdG9yIG91dChucm93KWAgLSBjcmVhdGUgYSBuZXcgbnVtZXJpYyB2ZWN0b3Igb2YgbGVuZ3RoIG4gd2l0aCBhIGNvbnN0cnVjdG9yOiBOdW1lcmljVmVjdG9yIG91dChuKS4gQW5vdGhlciB1c2VmdWwgd2F5IG9mIG1ha2luZyBhIHZlY3RvciBpcyB0byBjb3B5IGFuIGV4aXN0aW5nIG9uZTogYE51bWVyaWNWZWN0b3IgenMgPSBjbG9uZSh5cylgICAKCi0gSW4gQysrLCB5b3Ugc3Vic2V0IGEgbWF0cml4IHdpdGggKCksIG5vdCBbXQoKCmBgYHtyfQpyb3dzIDwtIDEwMApjb2xzIDwtIDUwMDAKCmJtIDwtIGJlbmNobWFyaygiUmNwcCIgPSB7CiAgeCA8LSBtYXRyaXgoc2FtcGxlKHJvd3MqY29scyksIHJvd3MpCiAgcm93U3Vtc0MoeCkKfSwKICAgICAgICAgICAgICAgICJSIiA9IHsKICAgICAgICAgICAgICAgICAgeCA8LSBtYXRyaXgoc2FtcGxlKHJvd3MqY29scyksIHJvd3MpCiAgICAgICAgICAgICAgICAgIHJvd1N1bXMoeCkKICAgICAgICAgICAgICAgIH0sCiAgICAgICAgICAgICAgICByZXBsaWNhdGlvbnMgPSA1LAogICAgICAgICAgICAgICAgY29sdW1ucyA9IGMoInRlc3QiLCAgImVsYXBzZWQiLCJyZWxhdGl2ZSIpKQoKa2FibGUoYm0pCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiV2VlayA3IC0gQ29tcHV0YXRpb24gdHJpY2tzIgpvdXRwdXQ6CiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAogIGh0bWxfZG9jdW1lbnQ6CiAgICBkZl9wcmludDogcGFnZWQKLS0tCmBgYHtyLCB3YXJuaW5nID0gRkFMU0UsZWNobz1GQUxTRX0KbGlicmFyeShyYmVuY2htYXJrKQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KGRvUGFyYWxsZWwpCmxpYnJhcnkoUmNwcCkKCmBgYAoKIyMgR3JhZGllbnQgRGVjZW50IGZvciBMaW5lYXIgUmVncmVzc2lvbgoKTGV0IHVzIGNvbnNpZGVyIHRoZSBmb2xsb3dpbmcgcmVncmVzc2lvbiBtb2RlbDoKJCRZID0gWFxiZXRhICsgXGVwc2lsb24sIFxlcHNpbG9uIFxzaW0gTihcbWF0aGJmezB9LCBcc2lnbWFeMiBJKSQkLCB0b2RheSB3ZSB3aWxsIGltcGxlbWVudCB0aGUgc3RvY2hhc3RpYyBncmFkaWVudCBkZWNlbnQgYWxnb3JpdGhtIGFuZCBpbnRyb2R1Y2Ugc29tZSB3YXlzIGluIHdoaWNoIHdlIGNhbiBzcGVlZCB1cCB0aGUgY29tcHV0YXRpb24uCmBgYHtyfQoKZ2V0X2RhdGEgPC0gZnVuY3Rpb24oKXsKbl9zYW1wbGVzIDwtIDEwMDAwCmZlYXR1cmVzIDwtIDUwClggPC0gbWF0cml4KHJub3JtKG4gPSBuX3NhbXBsZXMqZmVhdHVyZXMpLG5yb3c9bl9zYW1wbGVzKQplcHNpbG9uIDwtIHJub3JtKG49bl9zYW1wbGVzLHNkID0wLjEpCmJldGEgPC0gcm5vcm0obj1mZWF0dXJlcykKeSA8LSBYICUqJSBiZXRhICsgZXBzaWxvbgpyZXR1cm4oY2JpbmQoWCwgeSkpCn0KCgoKYGBgCgpPdXIgb2JqZWN0aXZlIGlzOgokJApcbWluX3tcYmV0YX1cVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMgokJAoKVGhlIGdyYWRpZW50IHdpdGggcmVzcGVjdCB0byAkXGJldGEkIGlzOgokJApcbmFibGFfe1xiZXRhfSBcVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMiA9IDIoWFxiZXRhIC0gWSlcY2RvdCBYID0gXHN1bV97aT0xfV5uIChYX3tpLn1cYmV0YSAtIFlfaSkgWF97Lml9CiQkCk91ciBnb2FsIHRvZGF5IGlzIHRvIGltcGxlbWVudCBHcmFkaWVudCBEZWNlbnQgYWxnb3JpdGhtLCB3aXRoIHRoZSBmb2xsb3dpbmcgdXBkYXRlIHJ1bGU6CgoKCiQkClxiZWdpbnthbGlnbn0KXGJldGFeeyh0KzEpfSAmPSBcYmV0YV57KHQpfSAtIFxnYW1tYSBcbmFibGFfe1xiZXRhfSBcVmVydCBYXGJldGEgLSBZICBcVmVydF97Mn1eMlxcCiY9IFxiZXRhXnsodCl9IC0gXGdhbW1hIFxjZG90IFxzdW1fe2k9MX1ebiAoWF97aS59XGJldGFeeyh0KX0gLSBZX2kpIFhfey5pfQpcZW5ke2FsaWdufQokJAoKYGBge3J9CmdldF9iZXRhX3NnZCA8LSBmdW5jdGlvbihYLCB5LGdldF9ncmFkaWVudCwgYmF0Y2hfc2l6ZT0zMiwgbl9pdGVyPTEwMDAsIHRvbD0wLjAxLCBnYW1tYSA9IDAuMDAxKXsKICBmZWF0dXJlcyA8LSBkaW0oWClbMl0KICBiZXRhIDwtIG1hdHJpeChydW5pZihmZWF0dXJlcyksIG5yb3cgPSAxKQogIGZvciAoaSBpbiAxOm5faXRlcil7CiAgICBzdWJfc2FtcGxlIDwtIHNhbXBsZShsZW5ndGgoeSksIGJhdGNoX3NpemUpCiAgICBncmFkIDwtIGdldF9ncmFkaWVudChYW3N1Yl9zYW1wbGUsIF0sIHlbc3ViX3NhbXBsZV0sIGJldGEpCiAgICBpZiAoc3VtKGdyYWReMikgPD0gdG9sKXsKICAgICAgcmV0dXJuKGJldGEpCiAgICB9CgoKICAgIGJldGEgIDwtIGJldGEgLSBnYW1tYSAqIGdyYWQKICB9CgogIHJldHVybihiZXRhKQoKfQoKYGBgCldlIHN0YXJ0IHdpdGggbmFpdmUgaW1wbGVtZW50YXRpb24KYGBge3J9CmdldF9ncmFkaWVudF9uYWl2ZSA8LSBmdW5jdGlvbihYLCB5LCBiZXRhKXsKICBncmFkIDwtIGJldGEgKiAwCiAgbl9kYXRhX3BvaW50IDwtIGxlbmd0aCh5KQogIGZvciAoaSBpbiAxOm5fZGF0YV9wb2ludCl7CiAgICBkaWZmIDwtIChYW2ksXSAlKiUgYmV0YSAteVtpXSlbMV0KICAgIGdyYWQgPC0gZ3JhZCArIGRpZmYgKiBYW2ksXQogIH0KICByZXR1cm4oZ3JhZCkKCn0KCmBgYAoKTm93IGxldCdzIGdvIG9uZSBzdGVwIGZ1cnRoZXIsIHVzaW5nIG1hdHJpeCBvcGVyYXRpb25zCgpgYGB7cn0KZ2V0X2dyYWRpZW50IDwtIGZ1bmN0aW9uKFgsIHksIGJldGEpewogIGRpZmYgPC0gWCAlKiUgbWF0cml4KGJldGEsIG5jb2w9MSkgLSB5CiAgZ3JhZCA8LXQoZGlmZikgJSolIFgKICByZXR1cm4oZ3JhZCkKCn0KYGBgCgpgYGB7cn0KCmJtIDwtIGJlbmNobWFyaygibmFpdmUgc2dkIiA9IHsKICAgICAgICAgICAgICAgICAgZGF0YSA8LSBnZXRfZGF0YSgpCiAgICAgICAgICAgICAgICAgIFggPC0gZGF0YVssMTo1MF0KICAgICAgICAgICAgICAgICAgeSA8LSBkYXRhWyw1MV0KICAgICAgICAgICAgICAgICAgYiA8LSBnZXRfYmV0YV9zZ2QoWCwgeSwgZ2V0X2dyYWRpZW50X25haXZlKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgICJzZ2QiID0gewogICAgICAgICAgICAgICAgICBkYXRhIDwtIGdldF9kYXRhKCkKICAgICAgICAgICAgICAgICAgWCA8LSBkYXRhWywxOjUwXQogICAgICAgICAgICAgICAgICB5IDwtIGRhdGFbLDUxXQogICAgICAgICAgICAgICAgICBiIDwtIGdldF9iZXRhX3NnZChYLCB5LCBnZXRfZ3JhZGllbnQpCiAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSwKICAgICAgICAgICAgICAgIGNvbHVtbnMgPSBjKCJ0ZXN0IiwgICJlbGFwc2VkIiwicmVsYXRpdmUiKSkKCmthYmxlKGJtKQoKYGBgCgoKTm93IHN1cHBvc2Ugd2Ugd2FudCB0byBkbyBzb21lIHN0YWJpbGl0eSBhbmFseXNpcywgZml0dGluZyB0aGUgbW9kZWwgb24gdmFyaWF0aW9ucyBvZiB0aGUgZGF0YXNldC4KV2Ugc3RhcnQgdGhlIG5haXZlIGFwcHJvYWNoIC0gbG9vcGluZwpgYGB7cn0Kc3RhYmlsaXR5X2JldGEgPC0gZnVuY3Rpb24oKXsKICAgIGRhdGEgPC0gZ2V0X2RhdGEoKQogICAgWCA8LSBkYXRhWywxOjUwXQogICAgeSA8LSBkYXRhWyw1MV0KICAgIGJldGEgPC0gZ2V0X2JldGFfc2dkKFgsIHksIGdldF9ncmFkaWVudCkKICByZXR1cm4oYmV0YSkKCn0KCgpgYGAKCgpBIGJldHRlciBhcHByb2FjaCB3b3VsZCBiZSB0byBwYXJhbGxlbGl6ZSB0aGlzIGNhbGN1bGF0aW9uLCB0aGF0IGlzIGZpdCBtdWx0aXBsZSBtb2RlbCBhdCB0aGUgc2FtZSB0aW1lCgpgYGB7cn0KCgpzdGFiaWxpdHlfbG9vcCA8LSBmdW5jdGlvbihuKXsKICBmb3IgKGkgaW4gMTpuKXsKICAgIGJldGEgPC0gc3RhYmlsaXR5X2JldGEoKQogIH0KfQpzdGFiaWxpdHlfcGFyYWxsZWwgPC0gZnVuY3Rpb24obil7Cm5vX2NvcmVzIDwtIGRldGVjdENvcmVzKCkgLSAxCmNsIDwtIG1ha2VDbHVzdGVyKG5vX2NvcmVzLCB0eXBlPSJGT1JLIikKcmVnaXN0ZXJEb1BhcmFsbGVsKGNsKQpyZXN1bHQgPC0gZm9yZWFjaChpPTE6bikgJWRvcGFyJSBzdGFiaWxpdHlfYmV0YSgpCgp9CmBgYAoKCmBgYHtyfQpibSA8LSBiZW5jaG1hcmsoInBhcmFsZWxsIiA9IHsKICBzdGFiaWxpdHlfcGFyYWxsZWwoMTApCn0sCiAgICAgICAgICAgICAgICAibG9vcCIgPSB7CiAgICAgICAgICAgICAgICAgIHN0YWJpbGl0eV9sb29wKDEwKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsCiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYygidGVzdCIsICAiZWxhcHNlZCIsInJlbGF0aXZlIikpCgprYWJsZShibSkKCgpgYGAKCiMjIFJjcHAKClJjcHAgZW5hYmxlcyBpbXByb3ZpbmcgcGVyZm9ybWFuY2UgYnkgcmV3cml0aW5nIGtleSBmdW5jdGlvbnMgaW4gQysrLgpXZSBzdGFydCB3aXRoIGEgc2ltcGxlIGV4YW1wbGU6CgoKYGBge3J9CmNwcEZ1bmN0aW9uKCdpbnQgYWRkKGludCB4LCBpbnQgeSwgaW50IHopIHsKICBpbnQgc3VtID0geCArIHkgKyB6OwogIHJldHVybiBzdW07Cn0nKQoKYWRkKDEsIDIsIDMpCgpgYGAKCgoKVmVjdG9yIGlucHV0LCBzY2FsYXIgb3V0cHV0CgpgYGB7ciwgd2FybmluZyA9IEZBTFNFfQpzdW1SIDwtIGZ1bmN0aW9uKHgpIHsKICB0b3RhbCA8LSAwCiAgZm9yIChpIGluIHNlcV9hbG9uZyh4KSkgewogICAgdG90YWwgPC0gdG90YWwgKyB4W2ldCiAgfQogIHRvdGFsCn0KCmNwcEZ1bmN0aW9uKCdkb3VibGUgc3VtQyhOdW1lcmljVmVjdG9yIHgpIHsKICBpbnQgbiA9IHguc2l6ZSgpOwogIGRvdWJsZSB0b3RhbCA9IDA7CiAgZm9yKGludCBpID0gMDsgaSA8IG47ICsraSkgewogICAgdG90YWwgKz0geFtpXTsKICB9CiAgcmV0dXJuIHRvdGFsOwp9JykKCmBgYAoKQSBmZXcgc3ludGF4IGNvbW1lbnRzOgoKLSBgZG91YmxlIHN1bUMoTnVtZXJpY1ZlY3RvciB4KWAgLSBkb3VibGUgaXMgdGhlIG91dHB1dCB0eXBlLCBgc3VtQyhOdW1lcmljVmVjdG9yIHgpYCBpcyB0aGUgZnVuY3Rpb24uCgotIGBpbnQgbiA9IHguc2l6ZSgpYCAtIGNyYXRlIGFuIGludGVnZXIgZXF1YWxzIHRvIHRoZSBsZW5ndGggb2YgeCB2ZWN0b3IKCi0gYGRvdWJsZSB0b3RhbCA9IDBgIC0gY3JlYXRlIGEgZG91YmxlIHR5cGUgbmFtZWQgdG90YWwsIGVxdWFscyB0byB6ZXJvLgoKCkxldCdzIGNvbXBhcmUgdGhlIHJ1bm5pbmcgdGltZXM6CgpgYGB7cn0KdmVjdG9yID0gcm5vcm0oMTAwMDApCmJtIDwtIGJlbmNobWFyaygiUmNwcCIgPSB7CiAgc3VtQyh2ZWN0b3IpCn0sCiAgICAgICAgICAgICAgICAiUiIgPSB7CiAgICAgICAgICAgICAgICAgIHN1bVIodmVjdG9yKQogICAgICAgICAgICAgICAgfSwKICAgICAgICAgICAgICAgIHJlcGxpY2F0aW9ucyA9IDUsCiAgICAgICAgICAgICAgICBjb2x1bW5zID0gYygidGVzdCIsICAiZWxhcHNlZCIsInJlbGF0aXZlIikpCgprYWJsZShibSkKYGBgCgoKTm93IG1hdHJpY2VzLCBsZXQncyBpbXBsZW1lbnQgcm93IHN1bXM6CmBgYHtyfQpjcHBGdW5jdGlvbignTnVtZXJpY1ZlY3RvciByb3dTdW1zQyhOdW1lcmljTWF0cml4IHgpIHsKICBpbnQgbnJvdyA9IHgubnJvdygpLCBuY29sID0geC5uY29sKCk7CiAgTnVtZXJpY1ZlY3RvciBvdXQobnJvdyk7CgogIGZvciAoaW50IGkgPSAwOyBpIDwgbnJvdzsgaSsrKSB7CiAgICBkb3VibGUgdG90YWwgPSAwOwogICAgZm9yIChpbnQgaiA9IDA7IGogPCBuY29sOyBqKyspIHsKICAgICAgdG90YWwgKz0geChpLCBqKTsKICAgIH0KICAgIG91dFtpXSA9IHRvdGFsOwogIH0KICByZXR1cm4gb3V0Owp9JykKCmBgYAoKQSBmZXcgc3ludGF4IGNvbW1lbnRzOgoKLWBOdW1lcmljVmVjdG9yIG91dChucm93KWAgLSBjcmVhdGUgYSBuZXcgbnVtZXJpYyB2ZWN0b3Igb2YgbGVuZ3RoIG4gd2l0aCBhIGNvbnN0cnVjdG9yOiBOdW1lcmljVmVjdG9yIG91dChuKS4gQW5vdGhlciB1c2VmdWwgd2F5IG9mIG1ha2luZyBhIHZlY3RvciBpcyB0byBjb3B5IGFuIGV4aXN0aW5nIG9uZTogYE51bWVyaWNWZWN0b3IgenMgPSBjbG9uZSh5cylgCgotIEluIEMrKywgeW91IHN1YnNldCBhIG1hdHJpeCB3aXRoICgpLCBub3QgW10KCgpgYGB7cn0Kcm93cyA8LSAxMDAKY29scyA8LSA1MDAwCgpibSA8LSBiZW5jaG1hcmsoIlJjcHAiID0gewogIHggPC0gbWF0cml4KHNhbXBsZShyb3dzKmNvbHMpLCByb3dzKQogIHJvd1N1bXNDKHgpCn0sCiAgICAgICAgICAgICAgICAiUiIgPSB7CiAgICAgICAgICAgICAgICAgIHggPC0gbWF0cml4KHNhbXBsZShyb3dzKmNvbHMpLCByb3dzKQogICAgICAgICAgICAgICAgICByb3dTdW1zKHgpCiAgICAgICAgICAgICAgICB9LAogICAgICAgICAgICAgICAgcmVwbGljYXRpb25zID0gNSwKICAgICAgICAgICAgICAgIGNvbHVtbnMgPSBjKCJ0ZXN0IiwgICJlbGFwc2VkIiwicmVsYXRpdmUiKSkKCmthYmxlKGJtKQpgYGAKCg==</div>
 
 
 
