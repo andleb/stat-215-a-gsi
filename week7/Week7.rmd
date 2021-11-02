@@ -72,7 +72,7 @@ get_beta_sgd <- function(X, y,get_gradient, batch_size=32, n_iter=1000, tol=0.01
   return(beta)
 
 }
-
+  
 ```
 We start with naive implementation
 ```{r}

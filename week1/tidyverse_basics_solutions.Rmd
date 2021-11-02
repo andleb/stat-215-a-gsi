@@ -1,8 +1,10 @@
 ---
 title: "Tidyverse examples"
 author: "STAT215A Fall 2020 Week 1"
-output: html_document
 date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 
